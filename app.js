@@ -15,7 +15,12 @@ app.get("/", function (req, res) {
   fs.readdir(`./files`, function (err, files) {
     files.forEach(function (file) {
       var data = fs.readFileSync(`./files/${file}`, "utf-8");
-      arr.push({ name: path.parse(file).name, content: data });
+      var createdOn = fs.statSync(`./files/${file}`).birthtime.toLocaleString();
+      arr.push({
+        name: path.parse(file).name,
+        content: data,
+        createdOn: createdOn,
+      });
     });
     res.render("index", { arr });
   });

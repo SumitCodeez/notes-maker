@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div class="main bg-zinc-700 w-screen h-screen text-white font-gilroy">
+    <div class="main bg-zinc-700 w-screen h-screen text-white overflow-hidden font-gilroy">
       <div class="form px-10 py-10">
         <form action="/create" method="post">
           <input
@@ -29,9 +29,15 @@
         <div class="task w-72 p-3 bg-zinc-900 rounded-lg">
           <h1 class="text-3xl tracking-tighter mb-5"><%= file.name %></h1>
           <p class="text-xl tracking-tighter mb-5">
-            <% if(file.content.length>15) {%> <%= file.content.substring(0,16)
-            +'...' %> <% }else{ %> <%= file.content %> <% } %>
+            <% if(file.content.length>15) {%>
+               <%= file.content.substring(0,16)+'...' %> 
+            <% }else{ %>
+              <%= file.content %>
+            <% } %>
           </p>
+          <h4 class="text-sm text-gray-400 mb-2">
+            Created on: <%= file.createdOn %>
+          </h4>
           <div class="tags flex justify-between">
             <a class="text-blue-500" href="/read/<%= file.name %>">read more</a>
             <div class="a-tags flex gap-2">
