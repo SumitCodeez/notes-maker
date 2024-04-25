@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks|Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="main bg-zinc-700 w-screen h-screen text-white font-gilroy">
+      <div class="form px-10 py-10">
+        <form action="/create" method="post">
+          <input
+            class="block w-full p-3 rounded-md bg-zinc-800 mb-4 outline-none inline-block"
+            type="text"
+            name="name"
+            placeholder="Title Of Your Task"
+          />
+          <textarea
+            class="block w-full p-3 rounded-md bg-zinc-800 mb-4 outline-none inline-block resize-none"
+            name="content"
+            placeholder="Enter Your Task..."
+          ></textarea>
+          <input class="px-6 py-2 bg-blue-500 rounded-md mt-2" type="submit" />
+        </form>
+      </div>
+      <div class="tasks flex flex-wrap px-10 py-10 gap-4">
+        <% if (arr.length > 0) { %> <% arr.forEach(function(file){ %>
+        <div class="task w-72 p-3 bg-zinc-900 rounded-lg">
+          <h1 class="text-3xl tracking-tighter mb-5"><%= file.name %></h1>
+          <p class="text-xl tracking-tighter mb-5">
+            <% if(file.content.length>15) {%> <%= file.content.substring(0,16)
+            +'...' %> <% }else{ %> <%= file.content %> <% } %>
+          </p>
+          <div class="tags flex justify-between">
+            <a class="text-blue-500" href="/read/<%= file.name %>">read more</a>
+            <div class="a-tags flex gap-2">
+              <a class="text-zinc-100" href="/edit/<%= file.name %>">edit</a>
+              <a class="text-red-400" href="/delete/<%= file.name %>">delete</a>
+            </div>
+          </div>
+        </div>
+        <% }) %> <% } else { %>
+        <h3 class="ml-5 text-2xl">no task yet</h3>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
